@@ -1,3 +1,29 @@
 name = input('What is the name of the robot? ')
-first_identifier = 1
+first_identifier = 1000
+grid_size = 10
+
+row = int(input('What is its current row coordinate? '))
+if row < 0:
+	row = 0
+elif row > grid_size - 1:
+	row = grid_size - 1
+
+col = int(input('What is its current column coordinate? '))
+
+if col > grid_size - 1:
+	col = grid_size - 1
+elif col < 0:
+	col = 0
+
 print(f'Hello! My name is {name}! My ID is {first_identifier}!')
+
+if row < 5:
+	vertical_axis = 'top'
+else:
+	vertical_axis = 'bottom'
+if col < 5:
+	horizontal_axis = 'left'
+else:
+	horizontal_axis = 'right'
+
+print(f'My current location is {(row,col)}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
