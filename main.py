@@ -1,21 +1,29 @@
+import random as rd
+
 name = input('What is the name of the robot? ')
 first_identifier = 1000
 grid_size = 10
 
-row = int(input('What is its current row coordinate? '))
-if row < 0:
-	row = 0
-elif row > grid_size - 1:
-	row = grid_size - 1
+row = rd.randint(0,9)
+col = rd.randint(0,9)
+init_direction = rd.choice(('n', 's', 'e', 'w'))
 
-col = int(input('What is its current column coordinate? '))
+#row = int(input('What is its current row coordinate? '))
+#if row < 0:
+#	row = 0
+#elif row > grid_size - 1:
+#	row = grid_size - 1
 
-init_direction = input('What is its initial direction [n|s|e|w]? ')
+#col = int(input('What is its current column coordinate? '))
 
-if col > grid_size - 1:
-	col = grid_size - 1
-elif col < 0:
-	col = 0
+#init_direction = input('What is its initial direction [n|s|e|w]? ')
+
+#if col > grid_size - 1:
+#	col = grid_size - 1
+#elif col < 0:
+#	col = 0
+
+
 
 print(f'Hello! My name is {name}! My ID is {first_identifier}!')
 
