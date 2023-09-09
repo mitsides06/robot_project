@@ -39,70 +39,93 @@ else:
 print(f'My current location is {(row,col)}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 
 current_location = (row,col)
-if init_direction == 'n':
-	print('I am facing North.')
-	while row > 0:                                # checking if it has space to move forward
-		print('Moving one step forward.')
-		row -= 1
-		current_location = (row,col)
-		if row < 5:                         # checking if it changed quadrant
-			vertical_axis = 'top'
+while current_location != (9,9):
+	if init_direction == 'n':
+		print('I am facing North.')
+		while row > 0:                                # checking if it has space to move forward
+			print('Moving one step forward.')
+			row -= 1
+			current_location = (row,col)
+			if row < 5:                         # checking if it changed quadrant
+				vertical_axis = 'top'
+			else:
+				vertical_axis = 'bottom'		
+			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 		else:
-			vertical_axis = 'bottom'		
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-	else:
-		print('I have a wall in front of me!')
-		print('Turning 90 degrees clockwise.')
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing East.')
+			if current_location == (9,9):
+				
+				print('I am drinking Ribena! I am happy!')
+			else:
+				print('I have a wall in front of me!')
+				print('Turning 90 degrees clockwise.')
+				init_direction = 'e'
+				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 		
 
-elif init_direction == 's':
-	print('I am facing South.')
-	while row < 9:                                  # checking if it has space to move forawrd
-		print('Moving one step forward.')
-		row += 1
-		current_location = (row,col)
-		if row < 5:                            # checking if it changed quadrant
-			vertical_axis = 'top'
+	elif init_direction == 's':
+		print('I am facing South.')
+		while row < 9:                                  # checking if it has space to move forawrd
+			print('Moving one step forward.')
+			row += 1
+			current_location = (row,col)
+			if row < 5:                            # checking if it changed quadrant
+				vertical_axis = 'top'
+			else:
+				vertical_axis = 'bottom'		
+			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 		else:
-			vertical_axis = 'bottom'		
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-	else:
-		print('I have a wall in front of me!')
-		print('Turning 90 degrees clockwise.')
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing West.')
+			if current_location == (9,9):
+				
+				print('I am drinking Ribena! I am happy!')
+			else:
+				print('I have a wall in front of me!')
+				print('Turning 90 degrees clockwise.')
+				init_direction = 'w'
+				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 		
 
-elif init_direction == 'e':
-	print('I am facing East.')
-	while col < 9:                                # checking if it has space to move forward
-		print('Moving one step forward.')
-		col += 1
-		current_location = (row,col)
-		if col < 5:                         # checking ig it changed quadrant
-			horizontal_axis = 'left'
+	elif init_direction == 'e':
+		print('I am facing East.')
+		while col < 9:                                # checking if it has space to move forward
+			print('Moving one step forward.')
+			col += 1
+			current_location = (row,col)
+			if col < 5:                         # checking ig it changed quadrant
+				horizontal_axis = 'left'
+			else:
+				horizontal_axis = 'right'		
+			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 		else:
-			horizontal_axis = 'right'		
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-	else:
-		print('I have a wall in front of me!')
-		print('Turning 90 degrees clockwise.')
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing South.')
+			if current_location == (9,9):
+				
+				print('I am drinking Ribena! I am happy!')
+			else:
+				print('I have a wall in front of me!')
+				print('Turning 90 degrees clockwise.')
+				init_direction = 's'
+				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 
-else:
-	print('I am facing West.')	
-	while col > 0:                                           # checking it has space to move forward
-		print('Moving one step forward.')
-		col -= 1
-		current_location = (row,col)
-		if col < 5:                                      # checking if it changed quadrant
-			horizontal_axis = 'left'
-		else:
-			horizontal_axis = 'right'		
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
-		print('I have a wall in front of me!')
-		print('Turning 90 degrees clockwise.')
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing North.')
+		print('I am facing West.')	
+		while col > 0:                                           # checking it has space to move forward
+			print('Moving one step forward.')
+			col -= 1
+			current_location = (row,col)
+			if col < 5:                                      # checking if it changed quadrant
+				horizontal_axis = 'left'
+			else:
+				horizontal_axis = 'right'		
+			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
+		else:
+			if current_location == (9,9):
+				
+				print('I am drinking Ribena! I am happy!')
+			else:
+				print('I have a wall in front of me!')
+				print('Turning 90 degrees clockwise.')
+				init_direction = 'n'
+				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
+
+
 		
 
