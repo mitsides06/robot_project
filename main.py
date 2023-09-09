@@ -41,58 +41,60 @@ print(f'My current location is {(row,col)}. I am in the {vertical_axis} {horizon
 current_location = (row,col)
 if init_direction == 'n':
 	print('I am facing North.')
-	print('Moving one step forward.')
-	if row != 0:
+	while row > 0:                                # checking if it has space to move forward
+		print('Moving one step forward.')
 		row -= 1
 		current_location = (row,col)
-		if row < 5:
+		if row < 5:                         # checking if it changed quadrant
 			vertical_axis = 'top'
 		else:
 			vertical_axis = 'bottom'		
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
+		print('I have a wall in front of me!')
+		
 
 elif init_direction == 's':
 	print('I am facing South.')
-	print('Moving one step forward.')
-	if row != 9:
+	while row < 9:                                  # checking if it has space to move forawrd
+		print('Moving one step forward.')
 		row += 1
 		current_location = (row,col)
-		if row < 5:
+		if row < 5:                            # checking if it changed quadrant
 			vertical_axis = 'top'
 		else:
 			vertical_axis = 'bottom'		
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
+		print('I have a wall in front of me!')
+		
 
 elif init_direction == 'e':
 	print('I am facing East.')
-	print('Moving one step forward.')
-	if col != 9:
+	while col < 9:                                # checking if it has space to move forward
+		print('Moving one step forward.')
 		col += 1
 		current_location = (row,col)
-		if col < 5:
+		if col < 5:                         # checking ig it changed quadrant
 			horizontal_axis = 'left'
 		else:
 			horizontal_axis = 'right'		
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-
+		print('I have a wall in front of me!')
+		
 else:
-	print('I am facing West.')
-	print('Moving one step forward.')	
-	if col != 0:
+	print('I am facing West.')	
+	while col > 0:                                           # checking it has space to move forward
+		print('Moving one step forward.')
 		col -= 1
 		current_location = (row,col)
-		if col < 5:
+		if col < 5:                                      # checking if it changed quadrant
 			horizontal_axis = 'left'
 		else:
 			horizontal_axis = 'right'		
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
-		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-
+		print('I have a wall in front of me!')
+		
 
