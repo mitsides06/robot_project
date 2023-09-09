@@ -52,6 +52,8 @@ if init_direction == 'n':
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
 		print('I have a wall in front of me!')
+		print('Turning 90 degrees clockwise.')
+		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing East.')
 		
 
 elif init_direction == 's':
@@ -67,6 +69,8 @@ elif init_direction == 's':
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
 		print('I have a wall in front of me!')
+		print('Turning 90 degrees clockwise.')
+		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing West.')
 		
 
 elif init_direction == 'e':
@@ -82,7 +86,9 @@ elif init_direction == 'e':
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
 		print('I have a wall in front of me!')
-		
+		print('Turning 90 degrees clockwise.')
+		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing South.')
+
 else:
 	print('I am facing West.')	
 	while col > 0:                                           # checking it has space to move forward
@@ -96,5 +102,7 @@ else:
 		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
 	else:
 		print('I have a wall in front of me!')
+		print('Turning 90 degrees clockwise.')
+		print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant. I am facing North.')
 		
 
