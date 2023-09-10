@@ -1,131 +1,117 @@
 import random as rd
 
-name = input('What is the name of the robot? ')
-first_identifier = 1000
-grid_size = 10
+def setup_robot(grid_size):
+	""" Initialise the robot name, ID, and initial position and direction.
+	
+	Args:
+		grid_size (int): The size of the grid.
+	
+	Returns:
+		str : Robot name
+		int : Robot ID
+		int : Robot's row coordinate
+		int : Robot's column coordinate
+		str : Robot's direction ("n", "s", "e", or "w")
+	"""		
 
-row = rd.randint(0,9)
-col = rd.randint(0,9)
-init_direction = rd.choice(('n', 's', 'e', 'w'))
+	name = input('What is the name of the robot? ')
+	id = 0
+	row = rd.randint(0,grid_size)
+	col = rd.randint(0,grid_size)
+	direction = rd.choice(('n', 's', 'e', 'w'))
+	return (name, id, row, col, direction)
 
-#row = int(input('What is its current row coordinate? '))
-#if row < 0:
-#	row = 0
-#elif row > grid_size - 1:
-#	row = grid_size - 1
+def print_robot_greeting(name, identifier):
+	print(f'Hello. My name is {name}. My ID is {identifier}.')
 
-#col = int(input('What is its current column coordinate? '))
+def navigate(current_direction,
+             current_row,
+             current_col,
+             target_row,
+             target_col,
+             grid_size):
+	""" Navigate robot.
 
-#init_direction = input('What is its initial direction [n|s|e|w]? ')
+	It prints out its current location and where it is facing. Then it prints out its next movement. It returns None if it is at the required location optherwise it returns the new row and col position and the new direction in a tuple.
 
-#if col > grid_size - 1:
-#	col = grid_size - 1
-#elif col < 0:
-#	col = 0
+	Args:
+		str : Robot's direction ("n", "s", "e", or "w")
+		int : Robot's row coordinate
+		int : Robot's col coordinate
+		int : Robot's target row
+		int : Robot's target col
+		int : Grid size
+	
+	Returns:
+		int : Robot's new row coordinate
+		int : Robot's new col coordinate
+		str : Robot's new direction
+	"""
 
-
-
-print(f'Hello! My name is {name}! My ID is {first_identifier}!')
-
-if row < 5:
-	vertical_axis = 'top'
-else:
-	vertical_axis = 'bottom'
-if col < 5:
-	horizontal_axis = 'left'
-else:
-	horizontal_axis = 'right'
-
-print(f'My current location is {(row,col)}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-
-current_location = (row,col)
-while current_location != (9,9):
-	if init_direction == 'n':
-		print('I am facing North.')
-		while row > 0:                                # checking if it has space to move forward
-			print('Moving one step forward.')
-			row -= 1
-			current_location = (row,col)
-			if row < 5:                         # checking if it changed quadrant
-				vertical_axis = 'top'
-			else:
-				vertical_axis = 'bottom'		
-			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-		else:
-			if current_location == (9,9):
-				
-				print('I am drinking Ribena! I am happy!')
-			else:
-				print('I have a wall in front of me!')
-				print('Turning 90 degrees clockwise.')
-				init_direction = 'e'
-				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-		
-
-	elif init_direction == 's':
-		print('I am facing South.')
-		while row < 9:                                  # checking if it has space to move forawrd
-			print('Moving one step forward.')
-			row += 1
-			current_location = (row,col)
-			if row < 5:                            # checking if it changed quadrant
-				vertical_axis = 'top'
-			else:
-				vertical_axis = 'bottom'		
-			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-		else:
-			if current_location == (9,9):
-				
-				print('I am drinking Ribena! I am happy!')
-			else:
-				print('I have a wall in front of me!')
-				print('Turning 90 degrees clockwise.')
-				init_direction = 'w'
-				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-		
-
-	elif init_direction == 'e':
-		print('I am facing East.')
-		while col < 9:                                # checking if it has space to move forward
-			print('Moving one step forward.')
-			col += 1
-			current_location = (row,col)
-			if col < 5:                         # checking ig it changed quadrant
-				horizontal_axis = 'left'
-			else:
-				horizontal_axis = 'right'		
-			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-		else:
-			if current_location == (9,9):
-				
-				print('I am drinking Ribena! I am happy!')
-			else:
-				print('I have a wall in front of me!')
-				print('Turning 90 degrees clockwise.')
-				init_direction = 's'
-				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-
+	if current_row == target_row and current_col == target_col:
+		print('I am finally here enjoying my drink!')
+		return None
 	else:
-		print('I am facing West.')	
-		while col > 0:                                           # checking it has space to move forward
-			print('Moving one step forward.')
-			col -= 1
-			current_location = (row,col)
-			if col < 5:                                      # checking if it changed quadrant
-				horizontal_axis = 'left'
+		if current_direction == "n":
+			print(f'I am currenlty at {(current_row, current_col)}, facing North.')
+			if current_row == 0:
+				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
+				return (current_row, current_col, 'e')
 			else:
-				horizontal_axis = 'right'		
-			print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
+				print('Moving forward')
+				return (current_row - 1, current_col, current_direction)
+
+		elif current_direction == "s":
+			print(f'I am currenlty at {(current_row, current_col)}, facing South.')
+			if current_row == grid_size - 1:
+				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
+				return (current_row, current_col, 'w')
+			else:
+				print('Moving forward')
+				return (current_row + 1, current_col, current_direction)
+
+		elif current_direction == "e":
+			print(f'I am currenlty at {(current_row, current_col)}, facing East.')
+			if current_col == grid_size - 1:
+				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
+				return (current_row, current_col, 's')
+			else:
+				print('Moving forward')
+				return (current_row, current_col + 1, current_direction)
+
 		else:
-			if current_location == (9,9):
-				
-				print('I am drinking Ribena! I am happy!')
+			print(f'I am currenlty at {(current_row, current_col)}, facing West.')
+			if current_col == 0:
+				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
+				return (current_row, current_col, 'n')
 			else:
-				print('I have a wall in front of me!')
-				print('Turning 90 degrees clockwise.')
-				init_direction = 'n'
-				print(f'My current location is {current_location}. I am in the {vertical_axis} {horizontal_axis} quadrant.')
-
-
+				print('Moving forward')
+				return (current_row, current_col - 1, current_direction)
 		
+			
 
+
+
+
+
+def run_simulation(grid_size=10, target_row=9, target_col=9):
+	""" Start robot navigation simulation.
+		
+	Args:
+		grid_size (int): The size of the grid. Default to 10.
+		target_row (int): The target row coordinate. Defaults to 9.
+		target_col (int): The target column coordinate. Defaults to 9.
+	"""
+	
+	name, identifier, row, col, direction = setup_robot(grid_size)
+	print_robot_greeting(name, identifier)
+	ans = navigate(direction, row, col, target_row, target_col, grid_size)
+	while ans is not None:
+		row, col, direction = ans
+		ans = navigate(direction, row, col, target_row, target_col, grid_size)
+	
+	return None
+	
+
+grid_size = 10
+run_simulation(grid_size=grid_size)
