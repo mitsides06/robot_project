@@ -1,5 +1,13 @@
 import random as rd
 
+def load_names_from_file(filename):
+	names = []
+	textfile = open(filename)
+	for line in textfile:
+		name = line.strip()
+		names.append(name)
+	return names
+
 def setup_robot(grid_size):
 	""" Initialise the robot name, ID, and initial position and direction.
 	
@@ -13,8 +21,8 @@ def setup_robot(grid_size):
 		int : Robot's column coordinate
 		str : Robot's direction ("n", "s", "e", or "w")
 	"""		
-
-	name = input('What is the name of the robot? ')
+	names = load_names_from_file('robot_names.txt')
+	name = rd.choice(names)
 	id = 0
 	row = rd.randint(0,grid_size)
 	col = rd.randint(0,grid_size)
@@ -49,6 +57,7 @@ def navigate(current_direction,
 	"""
 
 	if current_row == target_row and current_col == target_col:
+		print(f'I am currently at {(target_row, target_col)}!')
 		print('I am finally here enjoying my drink!')
 		return None
 	else:
