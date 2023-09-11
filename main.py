@@ -111,13 +111,18 @@ def run_simulation(grid_size=10, target_row=9, target_col=9):
 		target_row (int): The target row coordinate. Defaults to 9.
 		target_col (int): The target column coordinate. Defaults to 9.
 	"""
-	
-	name, identifier, row, col, direction = setup_robot(grid_size)
-	print_robot_greeting(name, identifier)
-	ans = navigate(direction, row, col, target_row, target_col, grid_size)
-	while ans is not None:
-		row, col, direction = ans
-		ans = navigate(direction, row, col, target_row, target_col, grid_size)
+	l = []
+	for i in range(3):
+		l.append(setup_robot(grid_size))
+		print_robot_greeting(l[i][0], l[i][1])
+	for i in range(3):
+		target_list = [0,grid_size - 1]
+		target_row, target_col = rd.choice(target_list), rd.choice(target_list)
+		print(f'{l[i][0]} is searching for its drink!')
+		ans = navigate(l[i][4], l[i][2], l[i][3], target_row, target_col, grid_size)
+		while ans is not None:
+			row, col, direction = ans
+			ans = navigate(direction, row, col, target_row, target_col, grid_size)
 	
 	return None
 	
