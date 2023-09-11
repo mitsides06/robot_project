@@ -23,7 +23,7 @@ def setup_robot(grid_size):
 	"""		
 	names = load_names_from_file('robot_names.txt')
 	name = rd.choice(names)
-	id = 0
+	id = rd.randint(0,10000000000000000)
 	row = rd.randint(0,grid_size)
 	col = rd.randint(0,grid_size)
 	direction = rd.choice(('n', 's', 'e', 'w'))
@@ -115,6 +115,7 @@ def run_simulation(grid_size=10, target_row=9, target_col=9):
 	for i in range(3):
 		l.append(setup_robot(grid_size))
 		print_robot_greeting(l[i][0], l[i][1])
+	print()
 	for i in range(3):
 		target_list = [0,grid_size - 1]
 		target_row, target_col = rd.choice(target_list), rd.choice(target_list)
@@ -123,6 +124,7 @@ def run_simulation(grid_size=10, target_row=9, target_col=9):
 		while ans is not None:
 			row, col, direction = ans
 			ans = navigate(direction, row, col, target_row, target_col, grid_size)
+		print()
 	
 	return None
 	
