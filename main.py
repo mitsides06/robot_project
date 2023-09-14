@@ -1,4 +1,5 @@
 import random as rd
+from robot import Robot
 
 def load_names_from_file(filename):
 	names = []
@@ -28,12 +29,12 @@ def setup_robot(grid_size):
 	col = rd.randint(0,grid_size)
 	position = (row, col)
 	direction = rd.choice(('n', 's', 'e', 'w'))
-	return {'id' : id, 'name' : name, 'position' : position, 'direction' : direction}
+	return Robot(id, name, position, direction)
 
-def print_robot_greeting(dic):
-	print(f"Hello. My name is {dic['name']}. My ID is {dic['id']}.")
+def print_robot_greeting(Robot):
+	print(f"Hello. My name is {Robot.name}. My ID is {Robot.id}.")
 
-def navigate(dic,
+def navigate(Robot,
              target_position,
              grid_size):
 	""" Navigate robot.
@@ -54,54 +55,54 @@ def navigate(dic,
 		str : Robot's new direction
 	"""
 
-	if dic['position'] == target_position:
+	if Robot.position == target_position:
 		print(f"I am currently at {target_position}!")
 		print('I am finally here enjoying my drink!')
 		return None
 	else:
-		if dic['direction'] == "n":
-			print(f"I am currenlty at {dic['position']}, facing North.")
-			if dic['position'][0] <= 0:
+		if Robot.direction == "n":
+			print(f"I am currenlty at {Robot.position}, facing North.")
+			if Robot.position[0] <= 0:
 				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
-				dic['direction'] = 'e'
-				return dic
+				Robot.direction = 'e'
+				return Robot
 			else:
-				dic['position'] = (dic['position'][0] - 1, dic['position'][1])
+				Robot.position = (Robot.position[0] - 1, Robot.position[1])
 				print('Moving forward')
-				return dic
+				return Robot
 
-		elif dic['direction'] == "s":
-			print(f"I am currenlty at {dic['position']}, facing South.")
-			if dic['position'][0] >= grid_size - 1:
+		elif Robot.direction == "s":
+			print(f"I am currenlty at {Robot.position}, facing South.")
+			if Robot.position[0] >= grid_size - 1:
 				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
-				dic['direction'] = 'w'
-				return dic
+				Robot.direction = 'w'
+				return Robot
 			else:
-				dic['position'] = (dic['position'][0] + 1, dic['position'][1])
+				Robot.position = (Robot.position[0] + 1, Robot.position[1])
 				print('Moving forward')
-				return dic
+				return Robot
 
-		elif dic['direction'] == "e":
-			print(f"I am currenlty at {dic['position']}, facing East.")
-			if dic['position'][1] >= grid_size - 1:
+		elif Robot.direction == "e":
+			print(f"I am currenlty at {Robot.position}, facing East.")
+			if Robot.position[1] >= grid_size - 1:
 				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
-				dic['direction'] = 's'
-				return dic
+				Robot.direction = 's'
+				return Robot
 			else:
-				dic['position'] = (dic['position'][0], dic['position'][1] + 1)
+				Robot.position = (Robot.position[0], Robot.position[1] + 1)
 				print('Moving forward')
-				return dic
+				return Robot
 
 		else:
-			print(f"I am currenlty at {dic['position']}, facing West.")
-			if dic['position'][1] <= 0:
+			print(f"I am currenlty at {Robot.position}, facing West.")
+			if Robot.position[1] <= 0:
 				print('There is a wall in front of me so I am rotating 90 degrees clockwise!')
-				dic['direction'] = 'n'
-				return dic
+				Robot.direction = 'n'
+				return Robot
 			else:
-				dic['position'] = (dic['position'][0], dic['position'][1] - 1)
+				Robot.position = (Robot.position[0], Robot.position[1] - 1)
 				print('Moving forward')
-				return dic
+				return Robot
 		
 			
 
@@ -120,15 +121,15 @@ def run_simulation(grid_size=10):
 	final_dic = {}
 	id_list = []
 	for i in range(3):
-		robot_dict = setup_robot(grid_size)
-		id_list.append(robot_dict['id'])
-		final_dic[robot_dict['id']] = robot_dict
-		print_robot_greeting(robot_dict)
+		Robot = setup_robot(grid_size)
+		id_list.append(Robot.id)
+		final_dic[Robot.id] = Robot
+		print_robot_greeting(Robot)
 	print()
 	for i in range(3):
 		target_list = [0,grid_size - 1]
 		target_position = (rd.choice(target_list), rd.choice(target_list))
-		print(f"{final_dic[id_list[i]]['name']} is searching for its drink!")
+		print(f"{final_dic[id_list[i]].name} is searching for its drink!")
 		ans = navigate(final_dic[id_list[i]], target_position, grid_size)
 		while ans is not None:
 			final_dic[id_list[i]] = ans
