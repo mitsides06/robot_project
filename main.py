@@ -1,6 +1,7 @@
 import random as rd
 from robot import Robot
-from robot_init import setup_robot
+from robot_init import RobotInitialiser
+
 
 def load_names_from_file(filename):
 	names = []
@@ -9,7 +10,6 @@ def load_names_from_file(filename):
 		name = line.strip()
 		names.append(name)
 	return names
-
 
 
 
@@ -57,21 +57,24 @@ def run_simulation(grid_size=10):
 		grid_size (int): The size of the grid. Default to 10.
 		target_row (int): The target row coordinate. Defaults to 9.
 		target_col (int): The target column coordinate. Defaults to 9.
+
 	"""
-	final_dic = {}
-	id_list = []
-	for i in range(3):
-		Robot = setup_robot(grid_size)
-		id_list.append(Robot.id)
-		final_dic[Robot.id] = Robot
-		Robot.greet()
+
+	quantity = int(input("Please enter the number of robots: "))
+	initialiser = RobotInitialiser(load_names_from_file("robot_names.txt"), quantity, grid_size)
+	final_dic = initialiser.create_robots()
+	print(final_dic)
+	id_list = final_dic.keys()
+	print(id_list)
+	for id_ in id_list:
+		final_dic[id_].greet()
 	print()
-	for i in range(3):
-		print(f"{final_dic[id_list[i]].name} is searching for its drink!")
-		ans = navigate(final_dic[id_list[i]])
+	for id_ in id_list:
+		print(f"{final_dic[id_].name} is searching for its drink!")
+		ans = navigate(final_dic[id_])
 		while ans is not None:
-			final_dic[id_list[i]] = ans
-			ans = navigate(final_dic[id_list[i]])
+			final_dic[id_] = ans
+			ans = navigate(final_dic[id_])
 		print()
 	
 	return None

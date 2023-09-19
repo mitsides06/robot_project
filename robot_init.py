@@ -1,40 +1,44 @@
 import random as rd
 from robot import Robot
 
-
-
-
-
-
-def load_names_from_file(filename):
-	names = []
-	textfile = open(filename)
-	for line in textfile:
-		name = line.strip()
-		names.append(name)
-	return names
-
-
-
-
-def setup_robot(grid_size):
-	""" Initialise the robot name, ID, and initial position and direction.
+class RobotInitialiser:
+	def __init__(self, names, quantity, grid_size=10):
+		self.directions = ["s", "n", "w", "e"]
+		self.names = names
+		self.grid_size = grid_size
+		self.quantity = quantity
 	
-	Args:
-		grid_size (int): The size of the grid.
+	def _generate_name(self):
+		return rd.choice(self.names)
 	
-	Returns:
-		str : Robot name
-		int : Robot ID
-		int : Robot's row coordinate
-		int : Robot's column coordinate
-		str : Robot's direction ("n", "s", "e", or "w")
-	"""		
-	names = load_names_from_file('robot_names.txt')
-	name = rd.choice(names)
-	id = rd.randint(0,10000000000000000)
-	row = rd.randint(0,grid_size - 1)
-	col = rd.randint(0,grid_size - 1)
-	position = (row, col)
-	direction = rd.choice(('n', 's', 'e', 'w'))
-	return Robot(id, name, position, direction, grid_size)
+	def _generate_id(self):
+		return rd. randint(0,100000)
+	
+	def _generate_position(self):
+		row = rd.randint(0, self.grid_size - 1)
+		col = rd.randint(0, self.grid_size - 1)
+		position = (row, col)
+		return position
+	
+	def _generate_direction(self):
+		return rd.choice(self.directions)
+	
+	def create_robots(self):
+		robot_dic = {}
+		for i in range(self.quantity):
+			id_ = self._generate_id()
+			name = self._generate_name()
+			position = self._generate_position()
+			direction = self._generate_direction()
+			robot_dic[id_] = Robot(id_, name, position, direction, self.grid_size)
+		return robot_dic
+			
+
+
+
+
+
+
+
+
+

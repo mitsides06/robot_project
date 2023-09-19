@@ -20,7 +20,7 @@ class Robot:
 			return 'East'
 
 	def greet(self):
-		print(f'Hello! My name is {self.name}. My iD is {self.id}.')
+		print(f'Hello! My name is {self.name}. My ID is {self.id}.')
 
 	def salut(self):
 		print(f'I am currently at {self.target_position}!')
