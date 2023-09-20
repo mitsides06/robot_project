@@ -1,6 +1,7 @@
 import random as rd
 from robot import Robot
 from robot_init import RobotInitialiser
+from grid import Grid
 
 
 def load_names_from_file(filename):
@@ -50,7 +51,7 @@ def navigate(Robot):
 
 
 
-def run_simulation(grid_size=10):
+def run_simulation(grid):
 	""" Start robot navigation simulation.
 		
 	Args:
@@ -61,7 +62,7 @@ def run_simulation(grid_size=10):
 	"""
 
 	quantity = int(input("Please enter the number of robots: "))
-	initialiser = RobotInitialiser(load_names_from_file("robot_names.txt"), quantity, grid_size)
+	initialiser = RobotInitialiser(load_names_from_file("robot_names.txt"), quantity, grid)
 	final_dic = initialiser.create_robots()
 	print(final_dic)
 	id_list = final_dic.keys()
@@ -80,5 +81,6 @@ def run_simulation(grid_size=10):
 	return None
 	
 
-grid_size = 10
-run_simulation(grid_size=grid_size)
+grid_size = int(input("Please enter grid size: "))
+grid = Grid(grid_size)
+run_simulation(grid)

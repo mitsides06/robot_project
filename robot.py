@@ -1,13 +1,14 @@
 import random as rd
+from grid import Grid
 
 class Robot:
-	def __init__(self, id_, name, position, direction, grid_size):
+	def __init__(self, id_, name, position, direction, grid, drink):
 		self.id = id_
 		self.name = name
 		self.position = position
 		self.direction = direction
-		self.grid_size = grid_size
-		self.target_position = (rd.choice([0, grid_size-1]), rd.choice([0, grid_size-1]))
+		self.grid = grid
+		self.target_position = grid.generate_random_corner_position()
 	
 	def generate_direction_string(self):
 		if self.is_north():
@@ -45,9 +46,9 @@ class Robot:
 		if self.is_north():
 			return self.position[0] <= 0
 		elif self.is_south():
-			return self.position[0] >= self.grid_size - 1
+			return self.position[0] >= self.grid.size - 1
 		elif self.is_east():
-			return self.position[1] >= self.grid_size - 1
+			return self.position[1] >= self.grid.size - 1
 		else:
 			return self.position[1] <= 0
 	def on_boundary_statement(self):
@@ -80,8 +81,6 @@ class Robot:
 
 
 
-
-k = Robot(3, 'Alex', (3,2), 'w', 9)
 
 
 
